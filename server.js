@@ -10,6 +10,18 @@ app.prepare().then(() => {
   const server = new Koa()
   const router = new KoaRouter()
 
+  router.get('/page2/:id', async (ctx) => {
+    const id = ctx.params.id
+    console.log('id === ', id)
+    await handle(ctx.req, ctx.res, {
+      pathname: '/page2',
+      query: { id }
+    })
+    ctx.response = false
+  })
+
+  server.use(router.routes())
+
   // ctx.res是node的，ctx.response是koa封装过的 req同理
   server.use(async (ctx, next) => {
     await handle(ctx.req, ctx.res)
