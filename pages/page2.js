@@ -10,7 +10,7 @@ const Title = styled.h1`
 
 const Page2 = ({ router, name, time }) => {
   function pageToIndex() {
-    Router.push('/')
+    Router.push('/hook')
   }
 
   // console.log('router === ', router)
