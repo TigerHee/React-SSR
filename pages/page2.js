@@ -18,9 +18,7 @@ const Page2 = ({ router, name, time }) => {
   return (
     <>
       <Title>this is title</Title>
-      <Button onClick={pageToIndex}>
-        query: {JSON.stringify(router.query)}
-      </Button>
+      <Button onClick={pageToIndex}>query: {JSON.stringify(router.query)}</Button>
       <div>
         {name} {time}
       </div>

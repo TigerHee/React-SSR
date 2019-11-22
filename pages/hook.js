@@ -43,7 +43,12 @@ export default () => {
       >
         NIT-COUNT
       </Button>
-      <Input value={name} onChange={(e)=>{setName(e.target.value)}} />
+      <Input
+        value={name}
+        onChange={e => {
+          setName(e.target.value)
+        }}
+      />
       <style jsx>{`
         .countStyle {
           color: red;

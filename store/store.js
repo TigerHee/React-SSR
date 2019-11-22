@@ -1,18 +1,9 @@
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
+import ReduxThunk from 'redux-thunk'
+import { composeWithDevTools } from 'redux-devtools-extension'
+import rootReducer from './reducers/index'
 
-const initSate = {
-  count: 0
+export default ()=>{
+  const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(ReduxThunk)))
+  return store
 }
-
-function reducer(state = initSate, action) {
-  switch (action.type) {
-    case 'ADD':
-      return { count: state.count + 1 }
-    default:
-      return state
-  }
-}
-
-const store = createStore(reducer, initSate)
-
-export default store

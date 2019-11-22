@@ -22,7 +22,7 @@ koa接收到请求，并调用nextjs
 ↓
 nextjs开始渲染
 ↓
-调用app的getInitialProps
+调用_app的getInitialProps
 ↓
 调用页面的getInitialProps
 ↓
