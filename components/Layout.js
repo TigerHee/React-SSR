@@ -70,7 +70,7 @@ function MyLayout({ children, user, logout, router, state }) {
     <Menu>
       <Menu.Item>
         <a href='#' onClick={handleLogout}>
-          登 出
+          退出登录
         </a>
       </Menu.Item>
     </Menu>
@@ -100,7 +100,7 @@ function MyLayout({ children, user, logout, router, state }) {
                   </a>
                 </Dropdown>
               ) : (
-                <Tooltip title='点击进行登录'>
+                <Tooltip title='点击登录'>
                   <a href={publicRuntimeConfig.OAUTH_URL}>
                     <Avatar size={40} icon='user' />
                   </a>
@@ -152,12 +152,8 @@ function MyLayout({ children, user, logout, router, state }) {
 }
 const mapStateToProps = state => ({
   user: state.user,
-  state: state
 })
 const mapDispatchToProps = dispatch => ({
-  logout: () => {
-    console.log('logout')
-  }
-  // logout: () => dispatch(logout()),
+  logout: () => dispatch(logout()),
 })
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(MyLayout))
