@@ -1,9 +1,19 @@
+import { useEffect } from 'react'
 import { Button } from 'antd'
 import Link from 'next/link'
 import { connect } from 'react-redux'
+import getConfig from 'next/config'
+import axios from 'axios'
+
+const { publicRuntimeConfig } = getConfig()
 
 const Index = props => {
   const { count, change } = props
+
+  useEffect(() => {
+    axios.get('/api/user/info').then(res => console.log('index axios res === ', res))
+  }, [])
+
   return (
     <div>
       <div>count: {count}</div>
@@ -20,6 +30,10 @@ const Index = props => {
       <Link href='/page2?id=1'>
         <Button>跳转到page2</Button>
       </Link>
+      <br />
+      <br />
+      <br />
+      <a href={publicRuntimeConfig.OAUTH_URL}>去授权</a>
     </div>
   )
 }

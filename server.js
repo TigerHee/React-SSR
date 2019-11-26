@@ -2,35 +2,38 @@ const Koa = require('koa')
 const KoaRouter = require('koa-router')
 const Next = require('next') // next作为koa中间件
 const session = require('koa-session')
+const Redis = require('ioredis')
+const auth = require('./server/auth')
 
 const dev = process.env.NODE_ENV !== 'production'
 const app = Next({ dev })
 const handle = app.getRequestHandler()
+const RedisSessionStore = require('./server/session-store')
+
+// 创建redis client
+const redis = new Redis()
 
 app.prepare().then(() => {
   const server = new Koa()
   const router = new KoaRouter()
 
-  server.keys = ['tiger dev Github App']
+  server.keys = ['tigerHee Github App']
   const SESSION_CONFIG = {
-    key: 'jid'
-    // store: {}
+    key: 'jid',
+    store: new RedisSessionStore(redis)
   }
   server.use(session(SESSION_CONFIG, server))
 
+  // 处理github授权登录
+  auth(server)
+
   server.use(async (ctx, next) => {
-    // console.log(ctx.cookies.get('id'))
-    if (!ctx.session.user) {
-      // ctx.session.user = {
-      //   name: 'tiger',
-      //   age: 25
-      // }
-    } else {
-      console.log('ctx.session === ', ctx.session)
-    }
+    console.log('==============================')
+    console.log('ctx.session === ', ctx.session)
     await next()
   })
 
+  // 处理page2路由
   router.get('/page2/:id', async ctx => {
     const id = ctx.params.id
     console.log('id === ', id)
@@ -41,12 +44,16 @@ app.prepare().then(() => {
     ctx.response = false
   })
 
-  router.get('/set/user', async ctx => {
-    ctx.session.user = {
-      name: 'tiger',
-      age: 25
+  // 设置用户
+  router.get('/api/user/info', async ctx => {
+    const user = ctx.session.userInfo
+    if (user) {
+      ctx.body = ctx.session.userInfo
+      ctx.set('Content-Type', 'application/json')
+    } else {
+      ctx.status = 401
+      ctx.body = '未登录'
     }
-    ctx.body = 'set session success'
   })
 
   server.use(router.routes())

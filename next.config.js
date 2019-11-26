@@ -1,6 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const withCss = require('@zeit/next-css')
+const baseConfig = require('./config')
 
 const configs = {
   distDir: 'dist', // 编译文件的输出目录
@@ -27,16 +28,17 @@ const configs = {
   env: {
     // 可以在页面上通过process.env.customKey 获取value
     customKey: 'value'
-  }
+  },
   // serverRuntimeConfig: {
   //   // 下面两个要通过 'next/config' 来读取,只有在服务端渲染时才会获取的配置
   //   mySecret: 'secret',
   //   secondSecret: process.env.SECOND_SECRET
   // },
-  // publicRuntimeConfig: { // 在服务端渲染和客户端渲染都可以获取的配置
-  //   staticFolder: '/static',
-  //   mySecret: process.env.MY_SECRET // Pass through env variables
-  // }
+  publicRuntimeConfig: {
+    // 在服务端渲染和客户端渲染都可以获取的配置
+    GITHUB_OAUTH_URL: baseConfig.github.github_oauth_url,
+    OAUTH_URL: `${baseConfig.github.github_oauth_url}?client_id=${baseConfig.github.client_id}&scope=${baseConfig.github.scope}`
+  }
 }
 
 if (typeof require !== 'undefined') {
