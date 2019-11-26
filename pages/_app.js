@@ -3,6 +3,7 @@ import App from 'next/app'
 import 'antd/dist/antd.css'
 import { Provider } from 'react-redux'
 import withRedux from '../lib/with-redux'
+import Layout from '../components/Layout'
 // import store from '../store/store'
 
 class MyApp extends App {
@@ -22,7 +23,9 @@ class MyApp extends App {
     const { Component, pageProps, reduxStore } = this.props
     return (
       <Provider store={reduxStore}>
-        <Component {...pageProps} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </Provider>
     )
   }

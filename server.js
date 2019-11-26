@@ -29,14 +29,13 @@ app.prepare().then(() => {
 
   server.use(async (ctx, next) => {
     console.log('==============================')
-    console.log('ctx.session === ', ctx.session)
+    console.log('ctx.session bool === ', !!ctx.session)
     await next()
   })
 
   // 处理page2路由
-  router.get('/page2/:id', async ctx => {
+  router.get('/test_page2/:id', async ctx => {
     const id = ctx.params.id
-    console.log('id === ', id)
     await handle(ctx.req, ctx.res, {
       pathname: '/page2',
       query: { id }
@@ -60,7 +59,8 @@ app.prepare().then(() => {
 
   // ctx.res是node的，ctx.response是koa封装过的 req同理
   server.use(async (ctx, next) => {
-    ctx.cookies.set('id', 'xxxxxx')
+    // ctx.cookies.set('id', 'xxxxxx')
+    ctx.req.session = ctx.session
     await handle(ctx.req, ctx.res)
     ctx.response = false
   })
