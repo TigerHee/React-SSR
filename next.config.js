@@ -36,8 +36,8 @@ const configs = {
   // },
   publicRuntimeConfig: {
     // 在服务端渲染和客户端渲染都可以获取的配置
-    GITHUB_OAUTH_URL: baseConfig.github.github_oauth_url,
-    OAUTH_URL: `${baseConfig.github.github_oauth_url}?client_id=${baseConfig.github.client_id}&scope=${baseConfig.github.scope}`
+    GITHUB_OAUTH_URL: baseConfig.GITHUB_OAUTH_URL,
+    OAUTH_URL: baseConfig.OAUTH_URL
   }
 }
 

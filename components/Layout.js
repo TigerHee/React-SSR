@@ -1,15 +1,11 @@
 import { useState, useCallback } from 'react'
 import getCofnig from 'next/config'
-import { connect } from 'react-redux'
 import { withRouter } from 'next/router'
-
+// import Link from 'next/link'
+import { connect } from 'react-redux'
 import axios from 'axios'
-
-import Link from 'next/link'
 import { Button, Layout, Icon, Input, Avatar, Tooltip, Dropdown, Menu } from 'antd'
-
 import Container from './Container'
-
 import { logout } from '../store/actions'
 
 const { Header, Content, Footer } = Layout
@@ -28,9 +24,8 @@ const footerStyle = {
   textAlign: 'center'
 }
 
-function MyLayout({ children, user, logout, router, state }) {
-  console.log('MyLayout user === ', user)
-  console.log('MyLayout state === ', state)
+function MyLayout({ children, user, logout, router }) {
+  console.log('MyLayout router === ', router)
   const urlQuery = router.query && router.query.query
 
   const [search, setSearch] = useState(urlQuery || '')
@@ -50,6 +45,7 @@ function MyLayout({ children, user, logout, router, state }) {
     logout()
   }, [logout])
 
+  // 因为是get请求采用href的方式代替
   const handleGotoOAuth = useCallback(e => {
     e.preventDefault()
     axios
@@ -82,10 +78,9 @@ function MyLayout({ children, user, logout, router, state }) {
         <Container renderer={<div className='header-inner' />}>
           <div className='header-left'>
             <div className='logo'>
-              <Icon type='github' style={githubIconStyle} />
-              {/* <Link href='/index'>
+              <a href='/'>
                 <Icon type='github' style={githubIconStyle} />
-              </Link> */}
+              </a>
             </div>
             <div>
               <Input.Search placeholder='搜索仓库' value={search} onChange={handleSearchChange} onSearch={handleOnSearch} />
@@ -101,12 +96,9 @@ function MyLayout({ children, user, logout, router, state }) {
                 </Dropdown>
               ) : (
                 <Tooltip title='点击登录'>
-                  <a href={publicRuntimeConfig.OAUTH_URL}>
+                  <a href={`/prepare-auth?url=${router.asPath}`}>
                     <Avatar size={40} icon='user' />
                   </a>
-                  {/* <a href={`/prepare-auth?url=${router.asPath}`}>
-                    <Avatar size={40} icon='user' />
-                  </a> */}
                 </Tooltip>
               )}
             </div>
@@ -150,10 +142,12 @@ function MyLayout({ children, user, logout, router, state }) {
     </Layout>
   )
 }
+
 const mapStateToProps = state => ({
-  user: state.user,
+  user: state.user
 })
 const mapDispatchToProps = dispatch => ({
-  logout: () => dispatch(logout()),
+  logout: () => dispatch(logout())
 })
+
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(MyLayout))

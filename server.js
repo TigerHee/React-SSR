@@ -43,7 +43,7 @@ app.prepare().then(() => {
     ctx.response = false
   })
 
-  // 设置用户
+  // 获取用户信息
   router.get('/api/user/info', async ctx => {
     const user = ctx.session.userInfo
     if (user) {

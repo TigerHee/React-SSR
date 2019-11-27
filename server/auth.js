@@ -1,8 +1,7 @@
 const axios = require('axios')
 
 const config = require('../config')
-
-const { client_id, client_secret, request_token_url } = config.github
+const { REQUEST_TOKEN_URL, OAUTH_URL, client_id, client_secret } = config
 
 module.exports = server => {
   // 处理code
@@ -15,7 +14,7 @@ module.exports = server => {
       }
       const result = await axios({
         method: 'POST',
-        url: request_token_url,
+        url: REQUEST_TOKEN_URL,
         data: {
           client_id,
           client_secret,
@@ -71,12 +70,10 @@ module.exports = server => {
     const path = ctx.path
     const method = ctx.method
     if (path === '/prepare-auth' && method === 'GET') {
-      // ctx.session = null
-      // ctx.body = `logout success`
       const { url } = ctx.query
       ctx.session.urlBeforeOAuth = url
-      // ctx.body = 'ready'
-      ctx.redirect(config.OAUTH_URL)
+      // ctx.body = 'ok'
+      ctx.redirect(OAUTH_URL)
     } else {
       await next()
     }
