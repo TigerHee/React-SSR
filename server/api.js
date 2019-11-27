@@ -1,3 +1,6 @@
+/**
+ * 请求github api处理
+*/
 const { requestGithub } = require('../lib/api')
 
 module.exports = server => {

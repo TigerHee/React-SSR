@@ -1,3 +1,6 @@
+/**
+ * 授权登录，退出登录相关处理
+*/
 const axios = require('axios')
 
 const config = require('../config')

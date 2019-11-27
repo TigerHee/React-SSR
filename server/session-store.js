@@ -1,3 +1,6 @@
+/**
+ * redis增删改查
+*/
 function getRedisSessionId(sid) {
   return `ssid:${sid}`
 }

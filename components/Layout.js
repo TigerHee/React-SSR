@@ -1,3 +1,6 @@
+/**
+ * 页面布局
+ */
 import { useState, useCallback } from 'react'
 import getCofnig from 'next/config'
 import { withRouter } from 'next/router'
@@ -64,9 +67,7 @@ const MyLayout = ({ children, user, logout, router }) => {
   const userDropDown = (
     <Menu>
       <Menu.Item>
-        <a href='#' onClick={handleLogout}>
-          退出登录
-        </a>
+        <span onClick={handleLogout}>退出登录</span>
       </Menu.Item>
     </Menu>
   )
