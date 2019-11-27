@@ -3,7 +3,9 @@ const KoaRouter = require('koa-router')
 const Next = require('next') // next作为koa中间件
 const session = require('koa-session')
 const Redis = require('ioredis')
+const KoaBody = require('koa-body')
 const auth = require('./server/auth')
+const api = require('./server/api')
 
 const dev = process.env.NODE_ENV !== 'production'
 const app = Next({ dev })
@@ -18,6 +20,9 @@ app.prepare().then(() => {
   const router = new KoaRouter()
 
   server.keys = ['tigerHee Github App']
+
+  server.use(KoaBody())
+
   const SESSION_CONFIG = {
     key: 'jid',
     store: new RedisSessionStore(redis)
@@ -26,10 +31,11 @@ app.prepare().then(() => {
 
   // 处理github授权登录
   auth(server)
+  api(server)
 
   server.use(async (ctx, next) => {
-    console.log('==============================')
-    console.log('ctx.session bool === ', !!ctx.session)
+    // console.log('==============================')
+    // console.log('ctx.session bool === ', !!ctx.session)
     await next()
   })
 

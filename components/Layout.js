@@ -24,8 +24,7 @@ const footerStyle = {
   textAlign: 'center'
 }
 
-function MyLayout({ children, user, logout, router }) {
-  console.log('MyLayout router === ', router)
+const MyLayout = ({ children, user, logout, router }) => {
   const urlQuery = router.query && router.query.query
 
   const [search, setSearch] = useState(urlQuery || '')
