@@ -1,6 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const withCss = require('@zeit/next-css')
+const withBundleAnalyzer = require('@zeit/next-bundle-analyzer')
 const baseConfig = require('./config')
 
 const configs = {
@@ -38,6 +39,17 @@ const configs = {
     // 在服务端渲染和客户端渲染都可以获取的配置
     GITHUB_OAUTH_URL: baseConfig.GITHUB_OAUTH_URL,
     OAUTH_URL: baseConfig.OAUTH_URL
+  },
+  analyzeBrowser: ['browser', 'both'].includes(process.env.BUNDLE_ANALYZE),
+  bundleAnalyzerConfig: {
+    server: {
+      analyzerMode: 'static',
+      reportFilename: '../bundles/server.html'
+    },
+    browser: {
+      analyzerMode: 'static',
+      reportFilename: '../bundles/client.html'
+    }
   }
 }
 
@@ -45,4 +57,4 @@ if (typeof require !== 'undefined') {
   require.extensions['.css'] = file => {}
 }
 
-module.exports = withCss(configs)
+module.exports = withBundleAnalyzer(withCss(configs))

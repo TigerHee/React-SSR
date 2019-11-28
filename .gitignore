@@ -12,6 +12,7 @@
 /.next/
 /dist/
 /out/
+/bundles/
 
 # production
 /build

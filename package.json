@@ -6,17 +6,20 @@
   "scripts": {
     "dev": "node server.js",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "analyze:browser": "cross-env BUNDLE_ANALYZE=browser next build"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@zeit/next-bundle-analyzer": "^0.1.2",
     "@zeit/next-css": "^1.0.1",
     "antd": "^3.25.2",
     "atob": "^2.1.2",
     "axios": "^0.19.0",
     "babel-plugin-import": "^1.12.2",
     "babel-plugin-styled-components": "^1.10.6",
+    "cross-env": "^6.0.3",
     "github-markdown-css": "^3.0.1",
     "ioredis": "^4.14.1",
     "koa": "^2.11.0",

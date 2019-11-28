@@ -1,6 +1,5 @@
 import dynamic from 'next/dynamic'
-
-import withRepoBasic from '../components/with-repo-basic'
+import WithRepoBasic from '../components/with-repo-basic'
 import api from '../lib/api'
 
 const MDRenderer = dynamic(() => import('../components/MarkdownRenderer'))
@@ -29,4 +28,4 @@ Detail.getInitialProps = async ({
   }
 }
 
-export default withRepoBasic(Detail, 'index')
+export default WithRepoBasic(Detail, 'index')

@@ -1,11 +1,10 @@
 import MarkdownIt from 'markdown-it'
-
 import { memo, useMemo } from 'react'
 import 'github-markdown-css'
 
 const md = new MarkdownIt({
   html: true,
-  linkify: true,
+  linkify: true
 })
 
 function b64_to_utf8(str) {
@@ -18,7 +17,7 @@ export default memo(function MarkdownRenderer({ content, isBase64 }) {
   const html = useMemo(() => md.render(markdown), [markdown])
 
   return (
-    <div className="markdown-body">
+    <div className='markdown-body'>
       <div dangerouslySetInnerHTML={{ __html: html }} />
     </div>
   )
