@@ -4,6 +4,7 @@ const Next = require('next') // next作为koa中间件
 const session = require('koa-session')
 const Redis = require('ioredis')
 const KoaBody = require('koa-body')
+const atob = require('atob')
 const auth = require('./server/auth')
 const api = require('./server/api')
 
@@ -11,6 +12,8 @@ const dev = process.env.NODE_ENV !== 'production'
 const app = Next({ dev })
 const handle = app.getRequestHandler()
 const RedisSessionStore = require('./server/session-store')
+
+global.atob = atob
 
 // 创建redis client
 const redis = new Redis()

@@ -3,7 +3,7 @@ import { Button, Icon, Tabs } from 'antd'
 import getCofnig from 'next/config'
 import { connect } from 'react-redux'
 import Router, { withRouter } from 'next/router'
-import LRU from 'lru-cache'
+// import LRU from 'lru-cache'
 
 import Repo from '../components/Repo'
 import { cacheArray } from '../lib/repo-basic-cache'
@@ -88,12 +88,12 @@ function Index({ userRepos, userStaredRepos, user, router }) {
           <Repo repo={repo} />
         ))} */}
         <Tabs activeKey={tabKey} onChange={handleTabChange} animated={false}>
-          <Tabs.TabPane tab='你的仓库' key='1'>
+          <Tabs.TabPane tab='我的仓库' key='1'>
             {userRepos.map(repo => (
               <Repo key={repo.id} repo={repo} />
             ))}
           </Tabs.TabPane>
-          <Tabs.TabPane tab='你关注的仓库' key='2'>
+          <Tabs.TabPane tab='关注的仓库' key='2'>
             {userStaredRepos.map(repo => (
               <Repo key={repo.id} repo={repo} />
             ))}

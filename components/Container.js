@@ -3,6 +3,7 @@ import { cloneElement } from 'react'
 const style = {
   width: '100%',
   maxWidth: '1200px',
+  minWidth: '700px',
   marginLeft: 'auto',
   marginRight: 'auto',
   paddingLeft: '20px',

@@ -3,7 +3,7 @@ import App from 'next/app'
 import 'antd/dist/antd.css'
 import { Provider } from 'react-redux'
 import Router from 'next/router'
-import withRedux from '../lib/with-redux'
+import withRedux from '../components/with-redux'
 import Layout from '../components/Layout'
 import PageLoading from '../components/PageLoading'
 

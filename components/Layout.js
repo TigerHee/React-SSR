@@ -4,17 +4,15 @@
 import { useState, useCallback } from 'react'
 import getCofnig from 'next/config'
 import { withRouter } from 'next/router'
-// import Link from 'next/link'
+import Link from 'next/link'
 import { connect } from 'react-redux'
 import axios from 'axios'
-import { Button, Layout, Icon, Input, Avatar, Tooltip, Dropdown, Menu } from 'antd'
+import { Layout, Icon, Input, Avatar, Tooltip, Dropdown, Menu } from 'antd'
 import Container from './Container'
 import { logout } from '../store/actions'
 
 const { Header, Content, Footer } = Layout
-
 const { publicRuntimeConfig } = getCofnig()
-
 const githubIconStyle = {
   color: 'white',
   fontSize: 40,
@@ -22,7 +20,6 @@ const githubIconStyle = {
   paddingTop: 10,
   marginRight: 20
 }
-
 const footerStyle = {
   textAlign: 'center'
 }
@@ -78,9 +75,11 @@ const MyLayout = ({ children, user, logout, router }) => {
         <Container renderer={<div className='header-inner' />}>
           <div className='header-left'>
             <div className='logo'>
-              <a href='/'>
-                <Icon type='github' style={githubIconStyle} />
-              </a>
+              <Link href='/'>
+                <a>
+                  <Icon type='github' style={githubIconStyle} />
+                </a>
+              </Link>
             </div>
             <div>
               <Input.Search placeholder='搜索仓库' value={search} onChange={handleSearchChange} onSearch={handleOnSearch} />
