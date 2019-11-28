@@ -2,7 +2,6 @@ import { useEffect } from 'react'
 import Repo from './Repo'
 import Link from 'next/link'
 import { withRouter } from 'next/router'
-
 import api from '../lib/api'
 import { get, cache } from '../lib/repo-basic-cache'
 
@@ -17,9 +16,9 @@ function makeQuery(queryObject) {
 }
 
 const isServer = typeof window === 'undefined'
-export default function(Comp, type = 'index') {
+
+export default (Comp, type = 'index') => {
   function WithDetail({ repoBasic, router, ...rest }) {
-    // console.log(repoBasic)
     const query = makeQuery(router.query)
 
     useEffect(() => {
@@ -32,7 +31,7 @@ export default function(Comp, type = 'index') {
       <div className='repo'>
         <div className='repo-basic'>
           <Repo repo={repoBasic} />
-          <div className='tabs'>
+          {/* <div className='tabs'>
             {type === 'index' ? (
               <span className='tab'>Readme</span>
             ) : (
@@ -40,7 +39,7 @@ export default function(Comp, type = 'index') {
                 <a className='tab index'>Readme</a>
               </Link>
             )}
-          </div>
+          </div> */}
         </div>
         <div>
           <Comp {...rest} />
@@ -64,17 +63,16 @@ export default function(Comp, type = 'index') {
   }
 
   WithDetail.getInitialProps = async context => {
-    // console.log(ctx.query)
     const { router, ctx } = context
     const { owner, name } = ctx.query
-
     const full_name = `${owner}/${name}`
 
+    // 执行Comp的getInitialProps
     let pageData = {}
     if (Comp.getInitialProps) {
       pageData = await Comp.getInitialProps(context)
     }
-
+    // 如果有缓存优先使用
     if (get(full_name)) {
       return {
         repoBasic: get(full_name),

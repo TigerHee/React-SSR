@@ -44,12 +44,13 @@ function Index({ userRepos, userStaredRepos, user, router }) {
     }
   }, [userRepos, userStaredRepos])
 
-  // useEffect(() => {
-  //   if (!isServer) {
-  //     cacheArray(userRepos)
-  //     cacheArray(userStaredRepos)
-  //   }
-  // })
+  //缓存仓库信息加快详情页访问
+  useEffect(() => {
+    if (!isServer) {
+      cacheArray(userRepos)
+      cacheArray(userStaredRepos)
+    }
+  })
 
   if (!user || !user.id) {
     return (
