@@ -1,15 +1,15 @@
 {
-  "name": "nextjs",
+  "name": "react-ssr",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "dev": "node server.js",
     "build": "next build",
-    "start": "next start",
+    "start": "cross-env NODE_ENV=production node server.js",
     "analyze:browser": "cross-env BUNDLE_ANALYZE=browser next build"
   },
-  "author": "",
+  "author": "tigerHee",
   "license": "ISC",
   "dependencies": {
     "@zeit/next-bundle-analyzer": "^0.1.2",

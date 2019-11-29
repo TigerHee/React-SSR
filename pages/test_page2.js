@@ -1,3 +1,6 @@
+/**
+ * 测试demo
+*/
 import { Button } from 'antd'
 import Router, { withRouter } from 'next/router'
 import styled from 'styled-components'
@@ -12,8 +15,6 @@ const Page2 = ({ router, name, time }) => {
   function pageToIndex() {
     Router.push('/test_hook')
   }
-
-  // console.log('router === ', router)
 
   return (
     <>

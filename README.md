@@ -24,11 +24,19 @@ npx create-next-app testApp
 ### 启动方式:
 
 ```
+
+npm i
+
 // 开发模式启动
 npm run dev
 
 // 打包资源分析
 npm run analyze:browser
+
+// 部署
+npm run build
+npm start
+
 ```
 
 ### SSR页面渲染流程：
