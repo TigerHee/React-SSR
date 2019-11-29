@@ -187,9 +187,7 @@ Index.getInitialProps = async ({ ctx, reduxStore }) => {
 }
 
 export default withRouter(
-  connect(function mapState(state) {
-    return {
-      user: state.user
-    }
-  })(Index)
+  connect(state => ({
+    user: state.user
+  }))(Index)
 )

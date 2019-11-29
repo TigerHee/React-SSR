@@ -2,7 +2,6 @@ import { memo, isValidElement, useEffect } from 'react'
 import { withRouter } from 'next/router'
 import { Row, Col, List, Pagination } from 'antd'
 import Link from 'next/link'
-import Router from 'next/router'
 import Repo from '../components/Repo'
 import { cacheArray } from '../lib/repo-basic-cache'
 
@@ -50,15 +49,6 @@ const selectedItemStyle = {
 const per_page = 20
 
 const isServer = typeof window === 'undefined'
-
-function getQueryStr(query, lang, sort, order, page) {
-  let queryString = `?query=${query}`
-  if (lang) queryString += `&lang=${lang}`
-  if (sort) queryString += `&sort=${sort}&order=${order || 'desc'}`
-  if (page) queryString += `&page=${page}`
-  queryString += `&per_page=${per_page}`
-  return queryString
-}
 
 const FilterLink = memo(({ name, query, lang, sort, order, page }) => {
   let queryString = `?query=${query}`

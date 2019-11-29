@@ -18,10 +18,11 @@ const configs = {
   //   if (process.env.YOUR_BUILD_ID) return process.env.YOUR_BUILD_ID
   //   return null // 返回null使用默认的unique id
   // },
-  // webpack(config, options) {
-  //   //修改webpack配置
-  //   return config
-  // },
+  webpack(config, options) {
+    // 忽略调moment的locale
+    config.plugins.push(new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/))
+    return config
+  },
   // webpackDevMiddleware: config => {
   //   // 修改webpackDevMiddleware配置
   //   return config

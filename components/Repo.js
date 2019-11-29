@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import { Icon } from 'antd'
-
 import { getLastUpdated } from '../lib/utils'
 
 function getLicense(license) {

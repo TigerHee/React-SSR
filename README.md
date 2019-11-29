@@ -1,52 +1,34 @@
 ## 使用next+koa2实现React服务端渲染(开发中...)
 
-### 启动方式:
-
-```
-npm run dev
-```
+##### 需要先安装redis并启动环境：
 
 [windows下载安装redis](https://github.com/microsoftarchive/redis/releases)
 
+### 启动方式:
 
+```
+//开发模式启动：
+npm run dev
+```
 
 #### SSR页面渲染流程：
+![SSR页面渲染流程：](./assets/ssr.jpg)
 
-```
-
-开始
-↓
-浏览器发起/page请求
-↓
-koa接收到请求，并调用nextjs
-↓
-nextjs开始渲染
-↓
-调用_app的getInitialProps
-↓
-调用页面的getInitialProps
-↓
-渲染出最终html
-↓
-返回给浏览器，渲染
-↓
-结束
-```
 
 #### 客户端路由跳转：
+![客户端路由跳转：](./assets/client.jpg)
 
-```
-开始
-↓
-点击链接按钮
-↓
-异步加载页面的组件js
-↓
-调用页面的getInitialProps
-↓
-数据返回，路由变化
-↓
-渲染新页面
-↓
-结束
-```
+
+#### 项目效果图：
+
+首页：
+![首页：](./assets/index.jpg)
+
+搜索结果页：
+![搜索结果页：](./assets/search.jpg)
+
+仓库详情页：
+![仓库详情页：](./assets/detail.jpg)
+
+打包分析：
+![仓库详情页：](./assets/analyze.jpg)
